@@ -1,18 +1,20 @@
-# tasks file for ssh-keys
+# tasks file
 ---
 - block:
+
     - name: generate | create ssh key generation directory
       file:
         path: "{{ item.path | dirname }}"
         owner: "{{ item.owner }}"
         group: "{{ item.group | default(item.owner) }}"
+        mode: 0700
         state: directory
       with_items: "{{ ssh_keys_generate_keys }}"
       tags:
         - ssh-keys-generate-directories
 
     - name: generate | generate private ssh key
-      shell: "{{ ssh_keys_generate_command | default(_ssh_keys_generate_command) }}"
+      shell: "{{ ssh_keys_generate_keys_command | default(_ssh_keys_generate_keys_command) }}"
       tags:
         - ssh-keys-generate-private-keys
         - skip_ansible_lint
@@ -45,4 +47,4 @@
       tags:
         - ssh-keys-generate-public-keys
   delegate_to: localhost
-  become: "{{ ssh_keys_generate_keys_local_become }}"
+  become: "{{ ssh_keys_generate_keys_become }}"

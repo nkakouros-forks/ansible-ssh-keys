@@ -1,6 +1,6 @@
 ## ssh-keys
 
-[![Build Status](https://travis-ci.org/Oefenweb/ansible-ssh-keys.svg?branch=master)](https://travis-ci.org/Oefenweb/ansible-ssh-keys)
+[![CI](https://github.com/Oefenweb/ansible-ssh-keys/workflows/CI/badge.svg)](https://github.com/Oefenweb/ansible-ssh-keys/actions?query=workflow%3ACI)
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-ssh--keys-blue.svg)](https://galaxy.ansible.com/Oefenweb/ssh_keys)
 
 Manage ssh public key authentication (public / private / authorized keys and known hosts) in Debian-like systems.
@@ -22,6 +22,9 @@ None
 * `ssh_keys_generate_keys.{n}.passphrase`: [default: `''`]: The passphrase for the private key
 * `ssh_keys_generate_keys.{n}.size`: [default: `4096`]: Size in bits of the TLS/SSL key to generate
 * `ssh_keys_generate_keys.{n}.type`: [default: `RSA`]: The algorithm used to generate the private key
+
+* `ssh_keys_generate_keys_command`: [optional, default: `_ssh_keys_generate_keys_command`]:
+* `ssh_keys_generate_keys_become`: [optional, default: `false`]: Whether or not to use `sudo` when generating ssh keys (locally)
 
 * `ssh_keys_private_keys`: [default: `[]`]: Private key declarations
 * `ssh_keys_private_keys.{n}.owner`: [required]: The name of the user that should own the file
@@ -85,8 +88,6 @@ None
         enctype: ssh-rsa
         fingerprint: 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=='
 ```
-
-The `fingerprint` and `enctype` can be obtained using `ssh-keyscan`: `ssh-keyscan github.com` or the handy `ssh-keyscan` wrapper included in this role.
 
 #### License
 
